@@ -62,15 +62,16 @@ public class Geometry {
         Triangle[] trianglesArray = new Triangle[numTriangles];
 
         for (int i = 0; i < numTriangles; i++) {
-            Point p1 = getPoint(i + 1);
-            Point p2 = getPoint(i + 1);
-            Point p3 = getPoint(i + 1);
+            Point p1 = getPointFromUser(i + 1);
+            Point p2 = getPointFromUser(i + 1);
+            Point p3 = getPointFromUser(i + 1);
             trianglesArray[i] = new Triangle(p1, p2, p3);
         }
 
         for (int i = 0; i < numTriangles; i++) {
-            System.out.print("Triangle " + (i + 1));
-            System.out.print("Perimeter: " + trianglesArray[i].calculatePerimeter());
+            System.out.println(
+                    "***************************** Triangle" + (i + 1) + "*************************************");
+            System.out.print("Perimeter: " + trianglesArray[i].calculatePerimeter() + " ");
             if (trianglesArray[i].isIsosceles()) {
                 System.out.println("The triangle is isosceles");
             } else {
@@ -81,9 +82,9 @@ public class Geometry {
         scanner.close();
     }
 
-    public static Point getPoint(int triangleNumber) {
+    public static Point getPointFromUser(int triangleNumber) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print(triangleNumber + ": Construction of a new Point Please enter x: ");
+        System.out.print("Triangle " + triangleNumber + ": Construction of a new Point Please enter x: ");
         double x = scanner.nextDouble();
         System.out.print("Please enter y: ");
         double y = scanner.nextDouble();
