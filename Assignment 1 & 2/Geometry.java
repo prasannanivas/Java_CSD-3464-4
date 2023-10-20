@@ -35,7 +35,7 @@ class Triangle {
 
     public double calculatePerimeter() {
         double perimeterSum = 0;
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i <= 2; i++) {
             perimeterSum += vertices[i].distanceBetween(vertices[i + 1]);
         }
         perimeterSum += vertices[2].distanceBetween(vertices[0]);
