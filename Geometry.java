@@ -69,8 +69,9 @@ public class Geometry {
         }
 
         for (int i = 0; i < numTriangles; i++) {
-            System.out.print("Triangle " + (i + 1));
-            System.out.print("Perimeter: " + trianglesArray[i].calculatePerimeter());
+            System.out.println(
+                    "***************************** Triangle" + (i + 1) + "*************************************");
+            System.out.print("Perimeter: " + trianglesArray[i].calculatePerimeter() + " ");
             if (trianglesArray[i].isIsosceles()) {
                 System.out.println("The triangle is isosceles");
             } else {
