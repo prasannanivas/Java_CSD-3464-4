@@ -20,7 +20,7 @@ class Point {
     public double distanceBetween(Point second) {
         double dx = this.x - second.x;
         double dy = this.y - second.y;
-        return Math.sqrt(dx * dx + dy * dy);
+        return Math.sqrt((dx * dx) + (dy * dy));
     }
 }
 
@@ -34,12 +34,12 @@ class Triangle {
     }
 
     public double calculatePerimeter() {
-        double perimeter = 0;
+        double perimeterSum = 0;
         for (int i = 0; i < 2; i++) {
-            perimeter += vertices[i].distanceBetween(vertices[i + 1]);
+            perimeterSum += vertices[i].distanceBetween(vertices[i + 1]);
         }
-        perimeter += vertices[2].distanceBetween(vertices[0]);
-        return perimeter;
+        perimeterSum += vertices[2].distanceBetween(vertices[0]);
+        return perimeterSum;
     }
 
     public boolean isIsosceles() {
@@ -59,19 +59,19 @@ public class Geometry {
 
         int numTriangles = scanner.nextInt();
 
-        Triangle[] triangles = new Triangle[numTriangles];
+        Triangle[] trianglesArray = new Triangle[numTriangles];
 
         for (int i = 0; i < numTriangles; i++) {
             Point p1 = getPoint(i + 1);
             Point p2 = getPoint(i + 1);
             Point p3 = getPoint(i + 1);
-            triangles[i] = new Triangle(p1, p2, p3);
+            trianglesArray[i] = new Triangle(p1, p2, p3);
         }
 
         for (int i = 0; i < numTriangles; i++) {
             System.out.print("Triangle " + (i + 1));
-            System.out.print("Perimeter: " + triangles[i].calculatePerimeter());
-            if (triangles[i].isIsosceles()) {
+            System.out.print("Perimeter: " + trianglesArray[i].calculatePerimeter());
+            if (trianglesArray[i].isIsosceles()) {
                 System.out.println("The triangle is isosceles");
             } else {
                 System.out.println("The triangle is not isosceles");
