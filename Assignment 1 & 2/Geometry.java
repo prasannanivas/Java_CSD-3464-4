@@ -25,27 +25,24 @@ class Point {
 }
 
 class Triangle {
-    private Point[] vertices = new Point[3];
+    private Point P1;
+    private Point P2;
+    private Point P3;
 
     public Triangle(Point p1, Point p2, Point p3) {
-        vertices[0] = p1;
-        vertices[1] = p2;
-        vertices[2] = p3;
+        this.P1 = p1;
+        this.P2 = p2;
+        this.P3 = p3;
     }
 
     public double calculatePerimeter() {
-        double perimeterSum = 0;
-        for (int i = 0; i <= 2; i++) {
-            perimeterSum += vertices[i].distanceBetween(vertices[i + 1]);
-        }
-        perimeterSum += vertices[2].distanceBetween(vertices[0]);
-        return perimeterSum;
+        return  P1.distanceBetween(P2) + P2.distanceBetween(P3) + P3.distanceBetween(P1);
     }
 
     public boolean isIsosceles() {
-        double side1 = vertices[0].distanceBetween(vertices[1]);
-        double side2 = vertices[1].distanceBetween(vertices[2]);
-        double side3 = vertices[2].distanceBetween(vertices[0]);
+        double side1 = P1.distanceBetween(P2);
+        double side2 = P2.distanceBetween(P3);
+        double side3 = P3.distanceBetween(P1);
 
         return side1 == side2 || side1 == side3 || side2 == side3;
     }
