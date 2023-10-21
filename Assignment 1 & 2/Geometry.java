@@ -25,30 +25,41 @@ class Point {
 }
 
 class Triangle {
-    private Point[] vertices = new Point[3];
+    private Point P1;
+    private Point P2;
+    private Point P3;
 
     public Triangle(Point p1, Point p2, Point p3) {
-        vertices[0] = p1;
-        vertices[1] = p2;
-        vertices[2] = p3;
+        this.P1 = p1;
+        this.P2 = p2;
+        this.P3 = p3;
     }
 
     public double calculatePerimeter() {
-        double perimeterSum = 0;
-        for (int i = 0; i < 2; i++) {
-            perimeterSum += vertices[i].distanceBetween(vertices[i + 1]);
-        }
-        perimeterSum += vertices[2].distanceBetween(vertices[0]);
-        return perimeterSum;
+        return  P1.distanceBetween(P2) + P2.distanceBetween(P3) + P3.distanceBetween(P1);
     }
 
     public boolean isIsosceles() {
-        double side1 = vertices[0].distanceBetween(vertices[1]);
-        double side2 = vertices[1].distanceBetween(vertices[2]);
-        double side3 = vertices[2].distanceBetween(vertices[0]);
+        double side1 = P1.distanceBetween(P2);
+        double side2 = P2.distanceBetween(P3);
+        double side3 = P3.distanceBetween(P1);
 
         return side1 == side2 || side1 == side3 || side2 == side3;
     }
+
+    public boolean isPointInside(Point point) {
+        double vectorAP = (point.getX() - P1.getX()) * (P2.getY() - P1.getY())
+            - (P2.getX() - P1.getX()) * (point.getY() - P1.getY());
+        double vectorBP = (point.getX() - P2.getX()) * (P3.getY() - P2.getY())
+            - (P3.getX() - P2.getX()) * (point.getY() - P2.getY());
+        double vectorCP = (point.getX() - P3.getX()) * (P1.getY() - P3.getY())
+            - (P1.getX() - P3.getX()) * (point.getY() - P3.getY());
+
+        return (vectorAP >= 0 && vectorBP >= 0 && vectorCP >= 0) || (vectorAP <= 0 && vectorBP <= 0 && vectorCP <= 0);
+}
+
+
+
 }
 
 public class Geometry {
@@ -68,6 +79,10 @@ public class Geometry {
             trianglesArray[i] = new Triangle(p1, p2, p3);
         }
 
+        System.out.print("Enter a point to check if it's inside the triangle: ");
+        Point userPoint = getPointFromUser(0);
+
+
         for (int i = 0; i < numTriangles; i++) {
             System.out.println(
                     "***************************** Triangle" + (i + 1) + "*************************************");
@@ -76,6 +91,11 @@ public class Geometry {
                 System.out.println("The triangle is isosceles");
             } else {
                 System.out.println("The triangle is not isosceles");
+            }
+            if (trianglesArray[i].isPointInside(userPoint)) {
+                System.out.println("The point is inside this triangle.");
+            } else {
+                System.out.println("The point is not inside this triangle.");
             }
         }
 
